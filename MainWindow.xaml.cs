@@ -3,6 +3,7 @@ using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Packets;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -60,8 +61,11 @@ namespace Archipealgo_Link_Tester
             // Create the DeathLink service.
             deathLink = session.CreateDeathLinkService();
 
-            // Set out tags.
+            // Set our tags.
             session.ConnectionInfo.UpdateConnectionOptions([.. session.ConnectionInfo.Tags, .. new string[4] { "TrapLink", "DeathLink", "RingLink", "SharedDamage" }]);
+
+            // Create the event handler for packet receives.
+            session.Socket.PacketReceived += Socket_PacketReceived;
 
             // Enable the other tabs and disable the connect button.
             Button_Connection_Connect.IsEnabled = false;
@@ -69,9 +73,37 @@ namespace Archipealgo_Link_Tester
             Tab_DeathLink.IsEnabled = true;
             Tab_RingLink.IsEnabled = true;
             Tab_DamageLink.IsEnabled = true;
+            Tab_Bounce.IsEnabled = true;
 
             // Change the window title to show our connection.
             Title = $"Connected to {Properties.Settings.Default.Server} as {Properties.Settings.Default.Slot}.";
+        }
+
+        // Listen for packets, specifically Bounce Packets.
+        private void Socket_PacketReceived(ArchipelagoPacketBase packet)
+        {
+            try
+            {
+                switch (packet)
+                {
+                    case BouncedPacket bouncedPacket:
+                        // Compile the keys and their respective values into a string array.
+                        List<string> packetData = [];
+                        foreach (var data in bouncedPacket.Data)
+                            packetData.Add($"\t{data.Key}: {data.Value}");
+
+                        // Add an entry to the ListBox in the Bounce Viewer tab with our information.
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            ListBox_Bounce_Viewer.Items.Add($"Packet with tags: '{String.Join(", ", bouncedPacket.Tags)}' has the following data:\r\n" + String.Join("\r\n", packetData));
+                        });
+                        break;
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         // Send a TrapLink packet using the inputted text as the trap name.

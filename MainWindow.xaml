@@ -94,6 +94,12 @@
                     <Button Content="Send DamageLink Packet" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="DamageLink"/>
                 </Grid>
             </hc:TabItem>
+
+            <hc:TabItem x:Name="Tab_Bounce" Header="Bounce Viewer" BorderBrush="#B146C2" IsEnabled="False">
+                <Grid Background="#FF181818">
+                    <ListBox x:Name="ListBox_Bounce_Viewer" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                </Grid>
+            </hc:TabItem>
         </hc:TabControl>
     </Grid>
 </Window>

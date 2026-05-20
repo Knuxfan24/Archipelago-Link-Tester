@@ -3,7 +3,7 @@
     // Gifting (probably too specialised to really test here?) | Uses DataStorage rather than a Bounce Packet.
     // MoveLink (this was apparently an April Fools thing, but might be worth having for the hell of it?)
     // Grouped DeathLink (would probably be incorporated into the standard DeathLink tester?)
-    // BreathLink
+    // BreathLink (probably have the same empty/null string test as DeathLink, as the cause is a string.)
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Packets;

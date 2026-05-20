@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Archipealgo_Link_Tester"
         xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="Archipealgo_Link_Tester.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="336" Width="800" MinWidth="800" MinHeight="336">
+        Title="Archipelago Link Tester" Height="336" Width="800" MinWidth="800" MinHeight="336">
     <Grid Background="#FF181818">
 
         <hc:TabControl Style="{StaticResource TabControlInLine}" x:Name="TabControl_Main">

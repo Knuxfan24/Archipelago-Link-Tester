@@ -1,4 +1,5 @@
-﻿using Archipelago.MultiClient.Net;
+﻿// TODO: Look in to how EnergyLink works and add a way to test that.
+using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Packets;
 using System;

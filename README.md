@@ -1,7 +1,14 @@
-# AP TrapLink Tester
+# Archipelago Link Tester
 
-A stupid little console app designed to send TrapLink packets to an Archipelago server, intended to make testing a client's TrapLink handling easier, rather than requiring another game to send the actual traps.
+A program to help with testing Link implementations for Archipelago worlds.
+
+Can currently test:
+
+- TrapLink, specifying the name of the trap.
+- DeathLink, specifying the cause (leaving the cause empty or setting it to null is also a valid option, as some games may not handle that well).
+- RingLink, specifying the number to give (negative values will instead take Rings away).
+- DamageLink, specifying the number of damage points to send.
 
 ### Usage
 
-Edit the server, slot, game and (if needed) password variables then build and run the application. Then type in the name of whatever item you want to attach to the TrapLink packet.
+Generate a multiworld including the Link Tester apworld as one of the slots, then set the server address, player name and (if applicable) password to connect to that slot on your server. Then use the approriate tab for whichever Link you wish to test.

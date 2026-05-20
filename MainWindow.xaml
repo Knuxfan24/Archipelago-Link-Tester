@@ -1,0 +1,99 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Archipealgo_Link_Tester"
+        xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="Archipealgo_Link_Tester.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="336" Width="800" MinWidth="800" MinHeight="336">
+    <Grid Background="#FF181818">
+
+        <hc:TabControl Style="{StaticResource TabControlInLine}" x:Name="TabControl_Main">
+            <hc:TabItem Header="Connection" BorderBrush="#B146C2" >
+                <Grid Background="#FF181818">
+                    <Label Content="Server Address" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="Address of the Archipelago server to connect to." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:TextBox x:Name="TextBox_Connection_Server" Margin="10,45,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FFB146C2" TextChanged="ServerAddress_Update"/>
+                    <Label Content="Slot Name" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="Name of the slot on the server to connect to." HorizontalAlignment="Right" Margin="0,78,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:TextBox x:Name="TextBox_Connection_Slot" Margin="10,113,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FFB146C2" TextChanged="Slot_Update"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="Server password (optional)." HorizontalAlignment="Right" Margin="0,146,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:TextBox x:Name="TextBox_Connection_Password" Margin="10,179,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FFB146C2" TextChanged="Password_Update"/>
+                    <Button x:Name="Button_Connection_Connect" Content="Connect" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="Connect"/>
+                </Grid>
+            </hc:TabItem>
+
+            <hc:TabItem x:Name="Tab_TrapLink" Header="TrapLink" BorderBrush="#B146C2" IsEnabled="False">
+                <Grid Background="#FF181818">
+                    <Label Content="Trap Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="Name of the trap to attach to the TrapLink packet." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:TextBox x:Name="TextBox_TrapLink_TrapName" Margin="10,45,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FFB146C2"/>
+                    <Button Content="Send TrapLink Packet" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="TrapLink"/>
+                </Grid>
+            </hc:TabItem>
+
+            <hc:TabItem x:Name="Tab_DeathLink" Header="DeathLink" BorderBrush="#B146C2" IsEnabled="False">
+                <Grid Background="#FF181818">
+                    <Label Content="DeathLink Cause" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="The cause for the sent DeathLink." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:TextBox x:Name="TextBox_DeathLink_Cause" Margin="10,45,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FFB146C2"/>
+                    <CheckBox x:Name="CheckBox_DeathLink_Null" Content="Null Cause" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Click="DeathLinkNullToggle"/>
+                    <Label Content="Whether this DeathLink's cause should be set to null, as some games may not handle that (or an empty cause string) well." HorizontalAlignment="Right" Margin="0,78,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <Button Content="Send DeathLink Packet" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="DeathLink"/>
+                </Grid>
+            </hc:TabItem>
+
+            <hc:TabItem x:Name="Tab_RingLink" Header="RingLink" BorderBrush="#B146C2" IsEnabled="False">
+                <Grid Background="#FF181818">
+                    <Label Content="Ring Quantity" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="The amount of Rings to send (or take if negative)." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:NumericUpDown x:Name="Numeric_RingLink_Count" Margin="10,45,10,0" VerticalAlignment="Top" SelectionBrush="#FFB146C2"/>
+                    <Button Content="Send RingLink Packet" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="RingLink"/>
+                </Grid>
+            </hc:TabItem>
+
+            <hc:TabItem x:Name="Tab_DamageLink" Header="DamageLink" BorderBrush="#B146C2" IsEnabled="False">
+                <Grid Background="#FF181818">
+                    <Label Content="Damage Amount" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <Label Content="How much damage to deal." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <hc:NumericUpDown x:Name="Numeric_DamageLink_Count" Margin="10,45,10,0" VerticalAlignment="Top" SelectionBrush="#FFB146C2" Minimum="0"/>
+                    <Button Content="Send DamageLink Packet" Margin="10,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="DamageLink"/>
+                </Grid>
+            </hc:TabItem>
+        </hc:TabControl>
+    </Grid>
+</Window>

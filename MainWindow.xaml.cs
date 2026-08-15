@@ -28,9 +28,15 @@ namespace Archipealgo_Link_Tester
             TextBox_Connection_Server.Text = Properties.Settings.Default.Server;
             TextBox_Connection_Slot.Text = Properties.Settings.Default.Slot;
             TextBox_Connection_Password.Text = Properties.Settings.Default.Password;
+            TextBox_Connection_Game.Text = Properties.Settings.Default.Game;
         }
 
         // Update the settings.
+        private void Game_Update(object sender, TextChangedEventArgs e)
+        {
+            Properties.Settings.Default.Game = TextBox_Connection_Game.Text;
+            Properties.Settings.Default.Save();
+        }
         private void ServerAddress_Update(object sender, TextChangedEventArgs e)
         {
             Properties.Settings.Default.Server = TextBox_Connection_Server.Text;
@@ -51,7 +57,7 @@ namespace Archipealgo_Link_Tester
         {
             // Create the session and try to log in to it.
             session = ArchipelagoSessionFactory.CreateSession(Properties.Settings.Default.Server);
-            LoginResult connectionResult = session.TryConnectAndLogin("Link Tester", Properties.Settings.Default.Slot, Archipelago.MultiClient.Net.Enums.ItemsHandlingFlags.AllItems, null, null, null, Properties.Settings.Default.Password, true);
+            LoginResult connectionResult = session.TryConnectAndLogin(Properties.Settings.Default.Game, Properties.Settings.Default.Slot, Archipelago.MultiClient.Net.Enums.ItemsHandlingFlags.AllItems, null, null, null, Properties.Settings.Default.Password, true);
 
             // If we fail to connect, then display the errors and return.
             if (!connectionResult.Successful)
